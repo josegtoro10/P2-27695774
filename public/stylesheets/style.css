@@ -1,8 +1,177 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body{
+	background: url(fondo.jpg);
+	font-family: 'BIZ UDMincho', serif;
+	padding: 0;
+	width: 80%;
+	margin: 0 auto;
+	display: block;
+
+
 }
 
-a {
-  color: #00B7FF;
+h1{
+	color:lightgrey;
+	font-size: 60px;
+	-webkit-text-stroke: 2px black;
+	text-shadow: 3px 3px 5px grey;
+	position: relative;
+	left: 200px;
+	margin: 0 
+	top: 30px;
+
+}
+
+h2{
+	font-size: 40px;
+	position: relative;
+	left: 200px;
+	position: relative;
+	bottom: 120px;
+	margin: 0 auto;
+	
+
+}
+
+img{
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+	position: relative;
+}
+
+.imagen{
+	box-shadow: 3px 3px  3px blue;
+
+}
+
+.datos-personales__h3{
+	font-size: 20px;
+	text-shadow: 3px 3px 5px darkgrey;
+	position: relative;
+	bottom: 40px;
+}
+
+.datos-personales__parrafo{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	bottom: 50px;
+}
+.redes-sociales{
+	position: relative;
+	bottom: 60px;
+}
+.redes-sociales__h3{
+	font-size: 20px;
+	text-shadow: 3px 3px 5px darkgrey;
+}
+.gmail{
+	width: 30px;
+	height: 20px;
+	border-radius: 80%;
+	
+
+}
+
+.whatsapp{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+
+
+}
+
+.facebook{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+
+}
+
+.instagram{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+}
+
+.redes-sociales{
+	width: 40%;
+	height: 20%;
+}
+
+.datos-academicos{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	bottom:530px;
+	left: 450px;
+
+}
+.datos-academicos__h3{
+	font-size: 20px;
+	text-shadow: 3px 3px 5px darkgrey;
+}
+.cursos__h3{
+	font-size: 20px;
+	text-shadow: 3px 3px 5px darkgrey;
+	position: relative;
+	bottom: 460px;
+
+}
+.cursos__parrafo{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	bottom: 470px;
+}
+.experiencia__h3{
+	width: 40%;
+	height: 40%;
+	font-size: 20px;
+	text-shadow: 3px 3px 5px darkgrey;
+	position: relative;
+	left: 450px;
+	bottom: 720px;
+
+}
+.experiencia__parrafo{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	bottom: 720px;
+	left: 450px;
+}
+.referencias__h3{
+	width: 40%;
+	height: 40%;
+	font-size: 20px;
+	text-shadow: 3px 3px 5px darkgrey;
+	position: relative;
+	bottom: 720px;
+	left: 450px;
+}
+.referencias__parrafo{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	bottom: 720px;
+	left: 450px;
+
+}
+
+hr{
+	color: grey;
+	box-shadow: 1px 1px blue;
+}
+.referencia{
+	width: 40%;
+	height: 40%;
+}
+
+.referencia__hr{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	bottom: 720px;
+	left: 210px;
 }
