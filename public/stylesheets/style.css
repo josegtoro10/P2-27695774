@@ -4,8 +4,11 @@ body{
 	padding: 0;
 	width: 80%;
 	margin: 0 auto;
-	display: block;
+	min-width: 400px;
+	min-height: 900px;
+}
 
+div{
 
 }
 
@@ -105,8 +108,8 @@ img{
 	position: relative;
 	bottom:530px;
 	left: 450px;
-
 }
+
 .datos-academicos__h3{
 	font-size: 20px;
 	text-shadow: 3px 3px 5px darkgrey;
@@ -141,6 +144,45 @@ img{
 	bottom: 720px;
 	left: 450px;
 }
+.habilidades__h3{
+	width: 40%;
+	height: 40%;
+	font-size: 20px;
+	text-shadow: 3px 3px 5px darkgrey;
+	position: relative;
+	left: 450px;
+	bottom: 720px;
+
+}
+.html{
+	width: 30px;
+	height: 30px;
+	border-radius: 6
+	0%;
+}
+.css{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+}
+.word{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+}
+.powerpoint{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+}
+
+.habilidades__parrafo{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	left: 450px;
+	bottom: 720px;
+}
 .referencias__h3{
 	width: 40%;
 	height: 40%;
@@ -169,6 +211,13 @@ hr{
 }
 
 .referencia__hr{
+	width: 40%;
+	height: 40%;
+	position: relative;
+	bottom: 720px;
+	left: 210px;
+}
+.habilidades__hr{
 	width: 40%;
 	height: 40%;
 	position: relative;
