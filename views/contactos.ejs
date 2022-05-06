@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  rel="stylesheet" href="contactos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Playfair+Display:ital@1&family=Plus+Jakarta+Sans:wght@200&family=Water+Brush&display=swap" rel="stylesheet">
+    <title>Contactos</title>
+</head>
+<body>
+    <div>
+    <h1>Contactos</h1>
+    </div>>
+    <div class="contenedor">
+        <div class="tabla">
+        <table>
+        <thead>
+        <tr>
+        <th scope="col"> Email</th>
+        <th scope="col"> Nombre </th>
+        <th scope="col"> Comentario </th>
+        <th scope="col">Fecha   -   Hora </th> 
+        <th scope="col"> IP </th>      
+        </tr>
+        </thead>
+        <tbody>
+        <% for (const producto of ct) { %>
+        <tr> 
+        <td><%= producto.email%></td>
+        <td><%= producto.nombre%></td>
+        <td><%= producto.comentario%></td>
+        <td><%= producto.fecha%></td>
+        <td><%= producto.ip%></td>
+        </tr>
+        <% } %>
+        </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
