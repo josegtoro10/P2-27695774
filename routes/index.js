@@ -4,8 +4,44 @@ const geoip = require('geoip-lite');
 const sqlite3=require('sqlite3').verbose();
 const http=require('http');
 const path = require('path');
+var cookieParser = require('cookie-parser');
 const nodemailer = require("nodemailer");
+const passport = require('passport');
+const session = require('express-session');
+const PassportLocal = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 require('dotenv').config();
+
+
+router.use(express.urlencoded({extended: true}));
+router.use(cookieParser(process.env.SECRET));
+
+router.use(session({
+	secret: process.env.SECRET,
+	resave: true,
+	saveUninitialized: true
+}))
+
+
+router.use(passport.initialize());
+router.use(passport.session());
+
+passport.use( new PassportLocal(function(username, password, done){
+
+	if(username === process.env.USERNAME && password === process.env.PASSWORD)
+		return done(null,{id: 1, name: "Gabriel"});
+
+	done(null, false)
+}))
+
+passport.serializeUser(function(user, done){
+	done(null, user.id)
+})
+
+passport.deserializeUser(function(user, done){
+	done(null,{id: 1, name: "Gabriel"});
+})
+
 
 const db=path.join(__dirname,"database","basededatos.db");
 const db_run=new sqlite3.Database(db, err =>{ 
@@ -26,6 +62,15 @@ db_run.run(crear,err=>{
 }
 })
 
+router.get('/login',(req,res)=>{
+	res.render('login.ejs')
+});
+
+router.post('/login', passport.authenticate('local',{
+	successRedirect: "/contactos",
+	failureRedirect: "/login"
+}));
+
 router.get('/',(req,res)=>{
 	res.render('index.ejs',{ct:{},
 	RECAPTCHA: process.env.RECAPTCHA,
@@ -33,8 +78,12 @@ router.get('/',(req,res)=>{
 });
 
 
-router.get('/contactos',(req,res)=>{
-	const sql="SELECT * FROM contacts;";
+router.get('/contactos',(req, res, next)=>{
+	if(req.isAuthenticated()) return next();
+
+	res.redirect("/login")
+},(req,res)=>{
+	const sql="SELECT * FROM contactos;";
 	db_run.all(sql, [],(err, rows)=>{
 			if (err){
 				return console.error(err.message);
@@ -114,5 +163,36 @@ router.post('/',(req,res)=>{
   })
 });
 
+router.get('/logout', function(req, res, next) {
+	req.session = null;
+	cookie = req.cookies;
+	res.clearCookie("connect.sid");
+	res.redirect('/');
+	req.logout(function(err) {
+	  if (err) { return next(err); }
+	  res.redirect('/');
+	});
+});
+
+passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_ID,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    callbackURL: "https://p2-27695774.herokuapp.com//auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+
+router.get('/auth/facebook',
+passport.authenticate('facebook'));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/contactos');
+});
 
 module.exports = router;

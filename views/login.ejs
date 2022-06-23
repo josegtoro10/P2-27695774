@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <script src="https://kit.fontawesome.com/0e19251887.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital@1&family=Playfair+Display:ital@1&family=Plus+Jakarta+Sans:wght@200&family=Water+Brush&display=swap" rel="stylesheet">
+    <title>Login</title>
+  </head>  
+  <div class="form-container">
+    <div class="form">
+      <form action="/login" method="POST">
+        <h1>BIENVENIDO!!</h1>
+        <div class="facebook-container">
+          <a href="/auth/facebook"><i class="fab fa-facebook"></i>Iniciar Sesión con Facebook</a>
+        </div>
+        <br>
+	<div class="user">Usuario</div>
+        <input type="email" name="username" placeholder="Ingrese su correo electronico">
+	<div class="pass">Contraseña</div>
+        <input type="password" name="password" placeholder="Ingrese su contraseña">
+        <input class="button" type="submit" value="Enviar" name="send">
+      </form>
+      <br>
+       <div><a href="/">Volver al curriculum</a></div>
+    </div>
+  </body>
+</html>

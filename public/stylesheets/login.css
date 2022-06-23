@@ -1,0 +1,59 @@
+body{
+	font-family: 'Libre Bodoni', serif;
+	background: #F2F2F2;
+}
+
+.form-container{
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+	width: 500px;
+	height: 480px;
+	background-color: #BDBDBD;
+	box-shadow: 3px 3px 3px 3px #000000;
+}
+
+.form{
+	margin: auto;
+}
+
+h1{
+	text-align:center;
+}
+
+h3{
+	text-align: center;
+}
+
+input{
+	width: 50%;
+	padding: 7px;
+	margin: 20px ;
+	border: none;
+	border-bottom: 3px solid #FFFF00;
+	color: #000000;
+	outline: none;
+}
+
+a{
+	text-decoration: none;
+	color: #0B0B3B;
+}
+
+i{
+	font-size: 20px;
+}
+
+.button{
+	background-color: #F2F2F2;
+	border-bottom: none;
+	padding: 12px;
+
+}
+
+.button:hover{
+	color: #FFFFFF;
+	background-color:#0B0B3B;
+	border-bottom: none;
+	padding-bottom: 12px;
+}
