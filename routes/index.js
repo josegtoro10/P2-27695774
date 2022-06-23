@@ -177,7 +177,7 @@ router.get('/logout', function(req, res, next) {
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_ID,
     clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL: "https://p2-27695774.herokuapp.com//auth/facebook/callback"
+    callbackURL: "https://p2-27695774.herokuapp.com//auth/facebook/autenticacion"
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
@@ -189,7 +189,7 @@ passport.use(new FacebookStrategy({
 router.get('/auth/facebook',
 passport.authenticate('facebook'));
 
-router.get('/auth/facebook/callback',
+router.get('/auth/facebook/autenticacion',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/contactos');
