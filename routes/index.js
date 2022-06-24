@@ -1,27 +1,24 @@
-var express = require('express');
-var router = express.Router();
-const geoip = require('geoip-lite');
+const express = require('express');
+const router = express.Router();
 const sqlite3=require('sqlite3').verbose();
 const http=require('http');
 const path = require('path');
-var cookieParser = require('cookie-parser');
-const nodemailer = require("nodemailer");
+const geoip = require('geoip-lite');
+const nodemailer = require('nodemailer');
 const passport = require('passport');
+const cookieParser= require('cookie-parser');
 const session = require('express-session');
-const PassportLocal = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const PassportLocal = require('passport-local').Strategy;
 require('dotenv').config();
-
 
 router.use(express.urlencoded({extended: true}));
 router.use(cookieParser(process.env.SECRET));
-
 router.use(session({
 	secret: process.env.SECRET,
 	resave: true,
 	saveUninitialized: true
-}))
-
+}));
 
 router.use(passport.initialize());
 router.use(passport.session());
@@ -54,6 +51,7 @@ if (err){
 
 const crear="CREATE TABLE IF NOT EXISTS contacts(email VARCHAR(16),nombre VARCHAR(16), comentario TEXT,fecha DATATIME,ip VARCHAR(15), country VARCHAR(20));";
 
+
 db_run.run(crear,err=>{
 	if (err){
 	return console.error(err.message);
@@ -71,19 +69,12 @@ router.post('/login', passport.authenticate('local',{
 	failureRedirect: "/login"
 }));
 
-router.get('/',(req,res)=>{
-	res.render('index.ejs',{ct:{},
-	RECAPTCHA: process.env.RECAPTCHA,
-  	ANALYTICS: process.env.ANALYTICS})	
-});
-
-
 router.get('/contactos',(req, res, next)=>{
 	if(req.isAuthenticated()) return next();
 
 	res.redirect("/login")
 },(req,res)=>{
-	const sql="SELECT * FROM contactos;";
+	const sql="SELECT * FROM contacts;";
 	db_run.all(sql, [],(err, rows)=>{
 			if (err){
 				return console.error(err.message);
@@ -163,36 +154,32 @@ router.post('/',(req,res)=>{
   })
 });
 
-router.get('/logout', function(req, res, next) {
-	req.session = null;
-	cookie = req.cookies;
-	res.clearCookie("connect.sid");
-	res.redirect('/');
-	req.logout(function(err) {
-	  if (err) { return next(err); }
-	  res.redirect('/');
-	});
-});
-
 passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_ID,
-    clientSecret: process.env.FACEBOOK_SECRET,
-    callbackURL: "https://p2-27695774.herokuapp.com//auth/facebook/autenticacion"
+	clientID: process.env.FACEBOOK_ID,
+	clientSecret: process.env.FACEBOOK_SECRET,
+	callbackURL: "https://p2-27695774.herokuapp.com//auth/facebook/autenticacion"
   },
   function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
+	User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+	  return cb(err, user);
+	});
   }
 ));
-
+  
 router.get('/auth/facebook',
 passport.authenticate('facebook'));
-
+  
 router.get('/auth/facebook/autenticacion',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/contactos');
+	res.redirect('/contactos');
 });
+
+router.get('/',(req,res)=>{
+	res.render('index.ejs',{ct:{},
+	RECAPTCHA:process.env.RECAPTCHA,
+	ANALYTICS:process.env.ANALYTICS})	
+});
+
 
 module.exports = router;
